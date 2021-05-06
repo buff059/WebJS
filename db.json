@@ -1,20 +1,6 @@
 {
   "users": [
     {
-      "name": "Nguyen Ha Dong",
-      "phone": "88996652525",
-      "email": "caigido@gmail.com",
-      "password": "123456",
-      "id": "NlbPb6jjB"
-    },
-    {
-      "name": "Michel",
-      "phone": "89556545664",
-      "email": "mchi034@gmail.com",
-      "password": "987654",
-      "id": "tPEmCAOyd"
-    },
-    {
       "name": "Peter",
       "phone": "89527778888",
       "email": "gg1234@gmail.com",
@@ -27,6 +13,13 @@
       "email": "maria098@gmail.com",
       "password": "14758a4661e76b89ab0419a5a15f765f",
       "id": "IQ70vOMIA"
+    },
+    {
+      "name": "Anna",
+      "phone": "88996652525",
+      "email": "anna123@gmail.com",
+      "password": "e10adc3949ba59abbe56e057f20f883e",
+      "id": "zYsSX2iPU"
     }
   ]
 }

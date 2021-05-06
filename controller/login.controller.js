@@ -35,6 +35,8 @@ module.exports.authLoginPOST = function(req, res) {
 	}
 
 
-	res.cookie('userId', user.id);
+	res.cookie('userName', user.name, {
+		signed: true
+	});
 	res.redirect('/users');
 };
