@@ -35,7 +35,7 @@ module.exports.authLoginPOST = function(req, res) {
 	}
 
 
-	res.cookie('userName', user.name, {
+	res.cookie('userID', user.id, {
 		signed: true   // Signed cookies reside in a different object to show developer intent;
 	});
 	res.redirect('/users');

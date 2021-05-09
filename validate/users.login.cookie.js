@@ -8,7 +8,7 @@ module.exports.authLoginPOST = function(req, res, next) {
 		return;
 	}
 
-	var user = db.get('users').find({ name: cookieRight.userName }).value();
+	var user = db.get('users').find({ id: cookieRight.userID }).value();
 
 	if(!user) {
 		res.redirect('/auth/login');

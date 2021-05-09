@@ -10,12 +10,15 @@ html
       if errors
         each error in errors
           .alert.alert-danger= error
-
+      
       form.form-group(action="/auth/login", method="POST")
         label.form-label Email:
-        input.form-control(type="email", name="email", value=values ? values.name : "") 
+        input.form-control(type="email", name="email", value=values ? values.email : "") 
 
         label.form-label Password:
-        input.form-control(type="password", name="password", value=values ? values.phone : "")
-
+        input.form-control(type="password", name="password")
+        br
         button.btn.btn-primary Sign In
+        
+        span.m-20 
+          a.btn.btn-primary(href="/users/create") Sign Up

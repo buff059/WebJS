@@ -7,6 +7,8 @@ const usersRouter = require('./routes/users.route');
 const authLogin = require('./routes/auth.login')
 const auth = require('./validate/users.login.cookie');
 
+const transferRouter = require('./routes/transfer.route');
+
 app.set('view engine', 'pug');
 app.set('views', './src/views');
 
@@ -19,8 +21,9 @@ app.get('/', auth.authLoginPOST, function(req, res) {
 	res.render('index');
 });
 
-app.use('/users', usersRouter); // very important !!!!
-app.use('/auth', authLogin)
+app.use('/users', usersRouter);
+app.use('/auth', authLogin);
+app.use('/transfer', transferRouter);
 
 app.listen(port, function() {
 	console.log('Server running on port ' + port);

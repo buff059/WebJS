@@ -29,7 +29,6 @@ module.exports.search = function(req, res) {
 
 module.exports.createGET = function(req, res) {
 	res.render('users/create');
-	console.log(req.cookies);
 }
 
 
