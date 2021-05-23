@@ -6,7 +6,8 @@ const db = low(adapter);
 // Set some defaults (required if JSON file is empty)
 db.defaults({ 
 	users: [],
-	transfers: [] 
+	transfers: [],
+	products: []
 }).write();
 
 module.exports = db;
