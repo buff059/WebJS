@@ -23,4 +23,4 @@ module.exports.createPOST = function(req, res, next) {
 	}
 
 	next();
-}
+};

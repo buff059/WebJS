@@ -10,7 +10,7 @@ const authLogin = require('./routes/auth.login')
 const auth = require('./validate/users.login.cookie');
 const transferRouter = require('./routes/transfer.route');
 const productsRouter = require('./routes/products.route');
-
+const sessionMiddleware = require('./validate/session');
 
 app.set('view engine', 'pug');
 app.set('views', './src/views');
@@ -18,15 +18,13 @@ app.set('views', './src/views');
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser('process.env.SESSION_SEC'));
+app.use(sessionMiddleware);
 // app.use(express.static('public'));
 
-app.get('/', auth.authLoginPOST, function(req, res) {
+
+
+app.get('/', function(req, res) {
 	res.render('index');
-});
-
-
-app.get('/ua', function(req, res){
-    res.send('user ' + req.headers['user-agent']);
 });
 
 app.use('/users', usersRouter);
