@@ -12,6 +12,8 @@ const transferRouter = require('./routes/transfer.route');
 const productsRouter = require('./routes/products.route');
 const sessionMiddleware = require('./validate/session');
 
+const apiProductsRouter = require('./api/routes/api.products.route');
+
 app.set('view engine', 'pug');
 app.set('views', './src/views');
 
@@ -31,6 +33,8 @@ app.use('/users', usersRouter);
 app.use('/auth', authLogin);
 app.use('/transfer', transferRouter);
 app.use('/products', productsRouter);
+
+app.use('/api/products', apiProductsRouter);
 
 app.listen(port, function() {
 	console.log('Server running on port ' + port);
