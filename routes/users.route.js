@@ -1,4 +1,6 @@
 const express = require('express');
+const multer = require('multer');
+
 const router = express.Router(); //return Router object
 
 const controller = require('../controller/users.controller');

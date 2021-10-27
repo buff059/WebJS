@@ -11,8 +11,10 @@ module.exports.createPOST = function(req, res) {
 		id: shortid.generate(),
 		account: req.body.account,
 		amount: parseInt(req.body.amount),
-		userID: req.signedCookies.userID
+		userID: req.signedCookies.cookieID
 	}
+
+	console.log(data);
 
 	if(!data.amount) {
 		res.render('transfer/create', {

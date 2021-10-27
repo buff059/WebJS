@@ -1,16 +1,26 @@
+const db = require('../db')
+
 module.exports.createPOST = function(req, res, next) {
 	var errors = [];
-	if(!req.body.name) {
+
+	var data = {
+		name: req.body.name,
+		phone: req.body.phone,
+		email: req.body.email,
+		password: req.body.password
+	}
+
+	if(!data.name) {
 		errors.push('Name is required');
 	}
-	if(!req.body.phone) {
+	if(!data.phone) {
 		errors.push('Phone is required');
 	}
 
-	if(!req.body.email) {
+	if(!data.email) {
 		errors.push('Email is required');
 	}
-	if(!req.body.password) {
+	if(!data.password) {
 		errors.push('Password is required');
 	}
 

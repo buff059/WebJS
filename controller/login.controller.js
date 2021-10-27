@@ -1,14 +1,44 @@
 const db = require('../db');
 const md5 = require('md5');
 
+
+
+function isObject(obj) {
+  return obj && obj.constructor && obj.constructor === Object;
+}
+
+function merge(target, source) {
+  for(var attr in source) {
+    // if property exists and is an object on both the target and the source
+    if(isObject(target[attr]) && isObject(source[attr])) {
+        merge(target[attr], source[attr]);
+    }else {
+        target[attr] = source[attr];
+    }
+  }
+  return target
+}
+
+function clone(x) {
+  return merge({}, x);
+}
+
+
 module.exports.authLogin = function(req, res) {
 	res.render('auth/login');
 };
 
 
 module.exports.authLoginPOST = function(req, res) {
-	var email = req.body.email;
-	var password = req.body.password;
+  var body = JSON.parse(JSON.stringify(req.body));
+  var copybody = clone(body);
+
+	//var email = req.body.email;
+	//var password = req.body.password;
+
+  var email = copybody.email;
+
+  var password = copybody.password;
 
 	var user = db.get('users').find({ email: email }).value();
 
@@ -35,7 +65,7 @@ module.exports.authLoginPOST = function(req, res) {
 	}
 
 
-	res.cookie('userID', user.id, {
+	res.cookie('cookieID', user.id, {
 		signed: true   // Signed cookies reside in a different object to show developer intent;
 	});
 	res.redirect('/users');
