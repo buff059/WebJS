@@ -1,7 +1,7 @@
 const db = require('../db');
 
 module.exports.authLoginPOST = function(req, res, next) {
-	var cookieRight = req.signedCookies;
+	cookieRight = req.signedCookies;
 
 	if(!cookieRight) {
 		res.redirect('/auth/login');

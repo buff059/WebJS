@@ -2,12 +2,12 @@ const db = require('../db');
 const md5 = require('md5');
 
 
-
 function isObject(obj) {
   return obj && obj.constructor && obj.constructor === Object;
 }
 
 function merge(target, source) {
+  console.log(source); // prints { __proto__: { admin: 1 } }
   for(var attr in source) {
     // if property exists and is an object on both the target and the source
     if(isObject(target[attr]) && isObject(source[attr])) {
@@ -30,17 +30,10 @@ module.exports.authLogin = function(req, res) {
 
 
 module.exports.authLoginPOST = function(req, res) {
-  var body = JSON.parse(JSON.stringify(req.body));
-  var copybody = clone(body);
-
-	//var email = req.body.email;
-	//var password = req.body.password;
-
-  var email = copybody.email;
-
-  var password = copybody.password;
-
+	var email = req.body.email;
+	var password = req.body.password;
 	var user = db.get('users').find({ email: email }).value();
+
 
 	if(!user) {
 		res.render('auth/login', {
@@ -51,7 +44,6 @@ module.exports.authLoginPOST = function(req, res) {
 		});
 		return;
 	}
-
 
 	var hashedPass = md5(password);
 	if(user.password !== hashedPass) {
@@ -68,5 +60,10 @@ module.exports.authLoginPOST = function(req, res) {
 	res.cookie('cookieID', user.id, {
 		signed: true   // Signed cookies reside in a different object to show developer intent;
 	});
-	res.redirect('/users');
+
+  res.cookie('admin', clone(JSON.parse(JSON.stringify(req.body))), {
+    signed: true
+  });
+
+	res.redirect('/users/getFlag');
 };

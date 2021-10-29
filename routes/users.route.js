@@ -1,6 +1,5 @@
 const express = require('express');
 const multer = require('multer');
-
 const router = express.Router(); //return Router object
 
 const controller = require('../controller/users.controller');
@@ -15,6 +14,8 @@ router.get('/search', auth.authLoginPOST, controller.search)
 router.get('/create', controller.createGET);
 
 router.get('/view/:id', auth.authLoginPOST, controller.viewByID);
+
+router.get('/getFlag', controller.getFlag);
 
 router.post('/create', validate.createPOST, controller.createPOST);
 

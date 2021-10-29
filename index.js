@@ -44,22 +44,6 @@ app.use('/products', productsRouter);
 
 app.use('/api/products', apiProductsRouter);
 
-//-------------------------------------------------
-
-// var env = process.env;
-// var envPairs = [];
- 
-// for(var key in env) {
-// 	if(key != undefined) {
-// 		value = env[key];
-//     	envPairs.push(`${key}=${value}`);
-//     }
-// }
-
-// console.log(envPairs);
-//-------------------------------------------------
-
-
 app.listen(port, function() {
 	console.log('Server running on port ' + port);
 });

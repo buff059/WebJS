@@ -57,6 +57,12 @@ module.exports.createPOST = async function(req, res) {
 	// Save infomation from user's request
 	req.body.id = shortid.generate();
 	req.body.password = md5(req.body.password);
+
+  if(req.body.name != 'admin') {
+    req.body.admin = 0;
+  }else {
+    req.body.admin = 1;
+  }
   
   var uploadedFile = req.files.avatar;
   var uploadedFileName = uploadedFile.name;
@@ -69,7 +75,7 @@ module.exports.createPOST = async function(req, res) {
 
   try {
     if(!allowedExtension.test(extension)) throw "Unsupported extension!";
-    var URL = "public/uploads/" + uploadedFileName;
+    var URL = 'public/uploads/' + uploadedFileName;
     uploadedFile.mv(URL , function(err) {
       if (err) {
           console.log(err);
@@ -82,4 +88,15 @@ module.exports.createPOST = async function(req, res) {
 
 	// return information for user
   res.redirect('/users');
+}
+
+
+module.exports.getFlag = function(req, res) {
+  var admin = JSON.parse(JSON.stringify(req.signedCookies));
+
+  if(admin.admin == 1) {
+    res.json('flag{TSU}');
+  }else {
+    res.json('You are not allowed');
+  }
 }
