@@ -3,6 +3,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 
+
 //const xmlparse = require('express-xml-bodyparser');
 const app = express();
 const port = 3333;
@@ -18,6 +19,7 @@ const auth = require('./validate/users.login.cookie');
 const sessionMiddleware = require('./validate/session');
 
 const apiProductsRouter = require('./api/routes/api.products.route');
+const apiUsersRouter = require('./api/routes/api.users.route');
 
 app.set('view engine', 'pug');
 app.set('views', './src/views');
@@ -42,7 +44,8 @@ app.use('/transfer', transferRouter);
 app.use('/products', productsRouter);
 //app.use('/xml2js', xml2jsRouter)
 
-app.use('/api/products', apiProductsRouter);
+app.use('/api', apiProductsRouter);
+app.use('/api', apiUsersRouter);
 
 app.listen(port, function() {
 	console.log('Server running on port ' + port);

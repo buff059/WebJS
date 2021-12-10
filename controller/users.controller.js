@@ -57,46 +57,20 @@ module.exports.createPOST = async function(req, res) {
 	// Save infomation from user's request
 	req.body.id = shortid.generate();
 	req.body.password = md5(req.body.password);
-
-  if(req.body.name != 'admin') {
-    req.body.admin = 0;
-  }else {
-    req.body.admin = 1;
-  }
   
-  var uploadedFile = req.files.avatar;
-  var uploadedFileName = uploadedFile.name;
-  var uploadedFileSize = uploadedFile.data.length;
-  var extension = path.extname(uploadedFileName);
-  var allowedExtension = /png|jpeg|jpg|gif/;
-
-  req.body.avatar = uploadedFileName
   db.get('users').push(req.body).write();
-
-  try {
-    if(!allowedExtension.test(extension)) throw "Unsupported extension!";
-    var URL = 'public/uploads/' + uploadedFileName;
-    uploadedFile.mv(URL , function(err) {
-      if (err) {
-          console.log(err);
-      }
-    });
-
-  }catch(err) {
-    console.log(err);
-  }
 
 	// return information for user
   res.redirect('/users');
 }
 
 
-module.exports.getFlag = function(req, res) {
-  var admin = JSON.parse(JSON.stringify(req.signedCookies));
-
-  if(admin.admin == 1) {
-    res.json('flag{TSU}');
+module.exports.getMessage = function(req, res) {
+  var user = JSON.parse(JSON.stringify(req.signedCookies));
+  var userSigned = db.get('users').find({ id: user.id }).value();
+  if(userSigned) { 
+    res.send(userSigned.message);
   }else {
-    res.json('You are not allowed');
+    res.send('Error');
   }
 }

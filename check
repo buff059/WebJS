@@ -1,0 +1,9 @@
+There is an easy way to check it.
+
+Write a program in any language you choose, which will do the following
+
+1) ./checker put 10.0.0.N flagID flag  -- stores secret string flag on your app running on host 10.0.0.N using flagID
+
+2) ./checker get 10.0.0.N flagID flag -- get secret from your app running on host 10.0.0.N using flagID and compare it with flag
+
+3) ./checker pwn 10.0.0.N -- attacks your application and prints 10 last stored secrets (flags)

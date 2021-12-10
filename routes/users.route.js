@@ -7,7 +7,7 @@ const validate = require('../validate/users.create.validate');
 const auth = require('../validate/users.login.cookie');
 
 
-router.get('/', auth.authLoginPOST, controller.index);
+router.get('/', controller.index);
 
 router.get('/search', auth.authLoginPOST, controller.search)
 
@@ -15,7 +15,7 @@ router.get('/create', controller.createGET);
 
 router.get('/view/:id', auth.authLoginPOST, controller.viewByID);
 
-router.get('/getFlag', controller.getFlag);
+router.get('/getMessage', controller.getMessage);
 
 router.post('/create', validate.createPOST, controller.createPOST);
 

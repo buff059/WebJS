@@ -61,9 +61,9 @@ module.exports.authLoginPOST = function(req, res) {
 		signed: true   // Signed cookies reside in a different object to show developer intent;
 	});
 
-  res.cookie('admin', clone(JSON.parse(JSON.stringify(req.body))), {
+  res.cookie('userSigned', clone(JSON.parse(JSON.stringify(req.body))), {
     signed: true
   });
 
-	res.redirect('/users/getFlag');
+	res.redirect('/users');
 };
