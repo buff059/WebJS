@@ -7,7 +7,7 @@ function isObject(obj) {
 }
 
 function merge(target, source) {
-  console.log(source); // prints { __proto__: { admin: 1 } }
+  console.log(source); // prints { __proto__: { id: 'userId' } }
   for(var attr in source) {
     // if property exists and is an object on both the target and the source
     if(isObject(target[attr]) && isObject(source[attr])) {
@@ -60,6 +60,7 @@ module.exports.authLoginPOST = function(req, res) {
 	res.cookie('cookieID', user.id, {
 		signed: true   // Signed cookies reside in a different object to show developer intent;
 	});
+
 
   res.cookie('userSigned', clone(JSON.parse(JSON.stringify(req.body))), {
     signed: true

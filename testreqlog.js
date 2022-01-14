@@ -1,26 +1,9 @@
+const db = require('./db');
 const async = require('async');
 const request = require('request');
-const fs = require('fs');
 
 var headers = {
   'Content-type': 'application/json'
-};
-
-
-var idb = fs.readFileSync('data.txt').toString().split("\n");
-for(i in idb) {
-    console.log(idb[i]);
-}
-
-console.log(idb);
-
-
-function getRandomString() { 
-  var result = ''; 
-  while (!result) {
-    result = Math.random().toString(36).substring(2); 
-    return result; 
-  }
 };
 
 
@@ -59,16 +42,9 @@ async function delayedLog(postOptions1, postOptions2, getOptions) {
 }
 
 
-async function process(array) {
-  for(var value of array) {
-
-    var name = getRandomString();
-    var phone = getRandomString();
-    var email = getRandomString() + '@gmail.com';
-    var password = getRandomString();
-
-    var dataCreateString = '{"name":' + '\"' + name + '\"' + ', "phone":' + '\"' + phone + '\"' + ', "email":' +  '\"' + email + '\"' + ', "password":' + '\"' + password + '\"' + ', "message": ""}';
-    var dataString = '{"email":' + '\"' + email + '", "password":' + '\"' + password + '\"' + ', "__proto__": {"id":' + '\"' + value + '\"' + '}}';
+async function process() {
+    var dataCreateString = '{"name":"Natasha", "phone":"89764527343","email": "natasha@gmail.com", "password": "1134512", "message": ""}';
+    var dataLoginString = '{"email": "natasha@gmail.com", "password": "1134512"}';
 
     var postOptions1 = {
       method: 'POST',
@@ -81,17 +57,18 @@ async function process(array) {
       method: 'POST',
       url: 'http://localhost:3333/auth/login',
       headers: headers,
-      body: dataString
+      body: dataLoginString
     };
 
     var getOptions = {
       method: 'GET',
-      url: 'http://localhost:3333/users/getMessage',
+      url: 'http://localhost:3333/users',
       headers: headers
     };
 
+
     await delayedLog(postOptions1, postOptions2, getOptions);
-  }
 }
 
-process(idb);
+
+process();

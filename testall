@@ -1,0 +1,3 @@
+#! /bin/bash
+
+node testlog.js && ./id.py && node test.js

@@ -1,3 +1,4 @@
+const db = require('./db');
 const async = require('async');
 const request = require('request');
 const fs = require('fs');
@@ -6,6 +7,8 @@ var headers = {
   'Content-type': 'application/json'
 };
 
+
+var idb = [];
 
 var idb = fs.readFileSync('data.txt').toString().split("\n");
 for(i in idb) {
